@@ -1,51 +1,74 @@
+let firssearchflag = true;
+
+function searchpage() {
+    document.querySelector("#repo1").className = "none";
+    document.querySelector("#container1").className = "container";
+}
+
 function cteateUsersList(res) {
     let userdiv;
     let container = document.querySelector('#userdetails');
+    if (!firssearchflag) {
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
     let userslen = res.items.length;
     for (let i = 0; i < userslen && i < 30; i++) {
         let text;
+        //for user data
         userdiv = document.createElement('div');
-        userdiv.style.display = "flex";
-        userdiv.style.flexDirection = "column";
-        userdiv.style.alignItems = "center";
-
+        userdiv.className = "userdiv";
+        //for the name
         let h2 = document.createElement('H2');
-        h2.style.textAlign = "center";
         text = res.items[i].login;
         h2.innerHTML = text;
         userdiv.appendChild(h2);
-
+        //div for img and div with buttons
+        let datadiv = document.createElement('div');
+        datadiv.className = "datadiv";
+        userdiv.appendChild(datadiv);
+        //users img
         let img = document.createElement("img");
-        img.style.width = "10em";
-        img.style.marginBottom = "1em";
         img.src = res.items[i].avatar_url;
-        userdiv.appendChild(img);
-
+        datadiv.appendChild(img);
+        //div for the buttons
+        let buttondiv = document.createElement('div');
+        buttondiv.className = "buttondiv";
+        datadiv.appendChild(buttondiv);
+        //button to repositories list
         let button = document.createElement("input");
         button.type = "button";
-        button.value = "view the users repositories";
-        button.style.width = "10em";
+        button.value = "repositories";
         button.addEventListener('click', () => {
             showRepo(res.items[i].repos_url)
         })
-        userdiv.appendChild(button);
+        buttondiv.appendChild(button);
 
-        a = document.createElement('a');
-        a.setAttribute('href', res.items[i].html_url);
-        a.innerHTML = "view the users full profile";
-        userdiv.appendChild(a);
+        let button2 = document.createElement("input");
+        button2.type = "button";
+        button2.value = "GitHub profile";
+        button2.addEventListener('click', () => {
+            window.location.href = res.items[i].html_url;
+        })
+        buttondiv.appendChild(button2);
+        //add user to the list
         container.appendChild(userdiv);
     }
+    //not first time search
+    firssearchflag = false;
+    //clear input
+    document.querySelector('#inputtext').value = "";
 }
 
 function cteateUserrepo(res) {
+    document.querySelector("#repo1").className = "repo";
     let container = document.querySelector("#container1");
     container.className = "containeroff";
     let reposdiv = document.querySelector("#repo1");
 
     let h2 = document.createElement('H2');
     h2.style.textAlign = "center";
-    h2.style.textShadow = "text-shadow: 2px 2px 8px red;"
     text = res[0].owner.login;
     h2.innerHTML = text;
     reposdiv.appendChild(h2);

@@ -40,6 +40,10 @@ form>input {
     align-items: center;
 }
 
+.none {
+    display: none
+}
+
 .repo {
     display: flex;
     flex-direction: column;
@@ -52,4 +56,60 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+input[type=button] {
+    width: 8em;
+}
+
+input[type=button]:hover {
+    background-color: rgb(206, 206, 206);
+}
+
+button:hover {
+    background-color: rgb(206, 206, 206);
+}
+
+.userdiv {
+    display: flex;
+    border: 0.1em solid black;
+    margin-Bottom: 1em;
+    flex-Direction: column;
+    align-Items: center;
+}
+
+.userdiv>h2 {
+    text-Align: center;
+    width: 100%;
+    margin: 0;
+    background-Color: rgb(217, 223, 228);
+}
+
+.datadiv {
+    width: 18em;
+    height: 7em;
+    display: flex;
+    justify-Content: flex-start;
+}
+
+.datadiv>img {
+    height: 100%;
+    margin-Bottom: 1em;
+}
+
+.buttondiv {
+    width: 9rem;
+    display: flex;
+    flex-Direction: column;
+    align-Items: center;
+    justify-Content: center;
+    justify-Content: space-around;
+    padding: 1em;
+}
+
+.backbtn {
+    position: fixed;
+    z-index: 2;
+    right: 0;
+    top: 0;
 }
