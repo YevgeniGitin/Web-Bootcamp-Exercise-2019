@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    text-shadow: 2px 2px 8px rgb(102, 173, 231);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.containeroff {
+    display: none;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+form>input {
+    height: 2em;
+    width: 14em;
+}
+
+.userdetails1 {
+    width: 100%;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.repo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
