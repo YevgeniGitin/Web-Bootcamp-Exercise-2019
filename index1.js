@@ -1,14 +1,9 @@
 let firssearchflag = true;
 
-function searchpage() {
-    document.querySelector("#repo1").className = "none";
-    document.querySelector("#container1").className = "container";
-}
-
 function cteateUsersList(res) {
     let userdiv;
     let container = document.querySelector('#userdetails');
-    if (!firssearchflag) {
+    if (!firssearchflag) { //if it not firs search delete the last resalts 
         while (container.firstChild) {
             container.removeChild(container.firstChild);
         }
@@ -62,10 +57,23 @@ function cteateUsersList(res) {
 }
 
 function cteateUserrepo(res) {
-    document.querySelector("#repo1").className = "repo";
+    document.querySelector("#repo1").className = "repo"; //show the repo list
     let container = document.querySelector("#container1");
-    container.className = "containeroff";
+    container.className = "containeroff"; //hide the users list
     let reposdiv = document.querySelector("#repo1");
+    //add back button
+    let backbtn = document.createElement('button');
+    backbtn.addEventListener('click', () => {
+        let repo = document.querySelector("#repo1");
+        while (repo.firstChild) {
+            repo.removeChild(repo.firstChild);
+        }
+        document.querySelector("#container1").className = "container";
+        repo.className = "none";
+    });
+    backbtn.innerHTML = "Search again!";
+    backbtn.className = "backbtn";
+    reposdiv.appendChild(backbtn);
 
     let h2 = document.createElement('H2');
     h2.style.textAlign = "center";
@@ -141,12 +149,16 @@ function showRepo(repurl) {
 
 function searchProfile() {
     let name = document.querySelector('#inputtext').value;
+    if (name === "") {
+        alert("Enter a name for search");
+        return;
+    }
+    name = name.replace(/\s/g, ""); //delete spases in the string
     fetch(`https://api.github.com/search/users?q=${name}`) //get thhe data
         .then((res) => { //turn the string to jeson object
             return res.json();
         })
         .then((res) => {
-
             cteateUsersList(res)
         })
         .catch((val) => {
